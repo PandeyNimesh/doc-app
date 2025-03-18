@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400">
+    <div className="flex items-center justify-between text-sm py-4 mb-4  border-b border-b-gray-400">
       <div className="flex items-center cursor-pointer">
         <img
           onClick={() => navigate("/")}
@@ -42,8 +42,14 @@ const Navbar = () => {
         </NavLink>
         <NavLink to="/contact">
           <li className="py-1">Contact</li>
-          <hr className="border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden" />
+          <hr className="border-none outline-none h-0.5 bg-primary w-3/5  m-auto hid" />
         </NavLink>
+
+        <NavLink to="/FeedbackForm">
+          <li className="py-1">Feedback</li>
+          <hr className="border-none outline-none h-0.5 bg-primary w-3/5  m-auto hid" />
+        </NavLink>
+
       </ul>
 
       <div className="flex items-center gap-4">

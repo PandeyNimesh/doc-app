@@ -10,6 +10,7 @@ import Appointment from "./pages/Appointment";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
+import FeedbackForm from "./pages/FeedbackForm";
 const App = () => {
   return (
     <div className="max-4 sm:mx-[10%]">
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/my-appointments" element={<MyAppointments />} />
         <Route path="/appointment/:docId" element={<Appointment />} />
+        <Route path="/FeedbackForm" element={<FeedbackForm />} />
       </Routes>
       <Footer />
     </div>
