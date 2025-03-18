@@ -9,6 +9,8 @@ import razorpay from "razorpay";
 import { sendOTP } from '../services/otpService.js';
 import { verifyOTP } from '../services/verifyService.js';
 
+import { sendVerificationEmail } from '../utils/email.js';
+
 // API to register user
 const registerUser = async (req, res) => {
   try {
@@ -50,6 +52,41 @@ const registerUser = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const resendVerificationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    if (user.isVerified) {
+      return res.json({
+        success: false,
+        message: "Email is already verified",
+      });
+    }
+
+    await sendVerificationEmail(user);
+
+    res.json({
+      success: true,
+      message: "Verification email resent",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 
 // API to verify user email via OTP
 const verifyUserEmail = async (req, res) => {
