@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// THOUGHT are we adding repetative lead thing?
 const leadSchema = new mongoose.Schema(
   {
     email: {
@@ -7,6 +8,11 @@ const leadSchema = new mongoose.Schema(
       required: true,
       unique: true,
       lowercase: true,
+      trim: true,
+    },
+    contact:{
+      type:Number,
+      required:false,
       trim: true,
     },
     speciality: {

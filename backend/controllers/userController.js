@@ -6,6 +6,8 @@ import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import razorpay from "razorpay";
+import { sendOTP } from '../services/otpService.js';
+import { verifyOTP } from '../services/verifyService.js';
 
 // API to register user
 const registerUser = async (req, res) => {
@@ -39,9 +41,27 @@ const registerUser = async (req, res) => {
     const newUser = new userModel(userData);
     const user = await newUser.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    // Send OTP to user's email
+    await sendOTP(email);
 
-    res.json({ success: true, token });
+    res.json({ success: true, message: "OTP sent to your email", otpSend: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// API to verify user email via OTP
+const verifyUserEmail = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    await verifyOTP(email, otp);
+
+    // Update user verification status
+    await userModel.findOneAndUpdate({ email }, { isVerified: true });
+
+    res.json({ success: true, message: "Email verified successfully" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
@@ -289,4 +309,5 @@ export {
   cancelAppointment,
   paymentRazorpay,
   verifyRazorpay,
+  verifyUserEmail
 };
