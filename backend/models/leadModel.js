@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const leadSchema = new mongoose.Schema(
   {
@@ -21,7 +21,6 @@ const leadSchema = new mongoose.Schema(
       ],
       required: true,
     },
-   
     status: {
       type: String,
       enum: ["new", "contacted", "qualified", "converted", "unqualified"],
@@ -47,4 +46,4 @@ const leadSchema = new mongoose.Schema(
 );
 
 const Lead = mongoose.model("Lead", leadSchema);
-module.exports = Lead;
+export default Lead; 

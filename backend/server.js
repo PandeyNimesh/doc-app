@@ -10,7 +10,7 @@ import leadRouter from "./routes/leadRoutes.js";
 
 // App Config
 const app = express();
-const PORT = process.env.PORT; 
+const PORT = process.env.PORT || 8000;
 
 // Connect to Database & Cloud Services
 connectDB();
@@ -24,7 +24,7 @@ app.use(cors());
 app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/user", userRouter);
-app.use("/api/leads", leadRouter); 
+app.use("/api/leads", leadRouter);
 
 // Root Endpoint
 app.get("/", (req, res) => {
