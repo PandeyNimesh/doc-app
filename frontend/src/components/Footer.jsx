@@ -2,8 +2,8 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="md:mx-10">
-      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
+    <div className="md:mx-3 border-t-2 border-gray-200">
+      <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-3 mt-12 text-sm">
         {/* left section */}
         <div>
           <img className="mb-5 w-13" src={assets.logo} alt="logo" />
