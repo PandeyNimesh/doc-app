@@ -6,25 +6,30 @@ import connectCloudinary from "./config/cloudinary.js";
 import adminRouter from "./routes/adminRoute.js";
 import doctorRouter from "./routes/doctorRoute.js";
 import userRouter from "./routes/userRoute.js";
+import leadRouter from "./routes/leadRoutes.js"; 
 
-// app config
+// App Config
 const app = express();
+const PORT = process.env.PORT; 
 
-const port = process.env.PORT || 5000;
+// Connect to Database & Cloud Services
 connectDB();
 connectCloudinary();
 
-// middleware
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-// API endpoint
+// API Endpoints
 app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/user", userRouter);
+app.use("/api/leads", leadRouter); 
 
+// Root Endpoint
 app.get("/", (req, res) => {
   res.send("API Working!");
 });
 
-app.listen(port, () => console.log("Server is running on port", port));
+// Start Server
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
