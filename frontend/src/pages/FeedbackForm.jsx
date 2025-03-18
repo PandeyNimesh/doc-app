@@ -36,7 +36,7 @@ function FeedbackForm() {
         setMessage("");
 
         try {
-            const response = await axios.post(`${backendUrl}+"/api/user/Feedback`, formData);
+            const response = await axios.post(`${backendUrl}+"/api/user/feedback`, formData);
             setMessage("Feedback submitted successfully! ");
             setFormData({ name: "", email: "", mobile: "", query: "" });
             setWordCount(0);
